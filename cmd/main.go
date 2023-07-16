@@ -1,14 +1,20 @@
 package main
 
 import (
-	"context"
 	"math/rand"
 	"time"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 
-	ctx := context.Background()
+	app := fiber.New()
 
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello world!")
+	})
+
+	app.Listen(":3000")
 }
