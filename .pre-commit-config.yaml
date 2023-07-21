@@ -7,13 +7,13 @@ repos:
       - id: no-go-testing
       - id: golangci-lint
       - id: go-unit-tests
-  
   - repo: local
     hooks:
       - id: lint-staged
-        name: lint-staged
-        entry: npx lint-staged
+        name: Lint Staged for Next
+        entry: npx lint-staged --cwd ./client --config ./client/.lintstagedrc.yaml
         language: system
-        types: [javascript, css, jsx, tsx, scss]
-        require_serial: true
-        files: ^client
+        types_or:
+          - tsx
+          - jsx
+        verbose: true
