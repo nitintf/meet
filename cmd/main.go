@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"math/rand"
 	"time"
 
@@ -16,11 +15,11 @@ func main() {
 
 	cfg, err := config.New()
 
+	log := logger.New()
+
 	if err != nil {
 		log.Panic("Unable to initialize config")
 	}
-
-	log := logger.New()
 
 	app := fiber.New()
 
