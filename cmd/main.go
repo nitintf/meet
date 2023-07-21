@@ -1,14 +1,26 @@
 package main
 
 import (
+	"log"
 	"math/rand"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/nitintf/meet/internal/config"
+	"github.com/nitintf/meet/internal/logger"
+	"go.uber.org/zap"
 )
 
 func main() {
 	rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	cfg, err := config.New()
+
+	if err != nil {
+		log.Panic("Unable to initialize config")
+	}
+
+	log := logger.New()
 
 	app := fiber.New()
 
@@ -16,5 +28,8 @@ func main() {
 		return c.SendString("Hello world!")
 	})
 
-	app.Listen(":3000")
+	log.Info("Server started", zap.Int("port", cfg.Port))
+	if err = app.Listen(":3000"); err != nil {
+		log.Error("error starting server", zap.Error(err))
+	}
 }

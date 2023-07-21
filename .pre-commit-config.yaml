@@ -1,0 +1,19 @@
+exclude: ^vendor
+repos:
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.0
+    hooks:
+      - id: go-fmt
+      - id: no-go-testing
+      - id: golangci-lint
+      - id: go-unit-tests
+  
+  - repo: local
+    hooks:
+      - id: lint-staged
+        name: lint-staged
+        entry: npx lint-staged
+        language: system
+        types: [javascript, css, jsx, tsx, scss]
+        require_serial: true
+        files: ^client

@@ -1,0 +1,7 @@
+'*.{jsx,ts,tsx}':
+  - organize-imports-cli
+  - npm format:fix
+  - npm lint:fix
+  - pretty-quick --staged
+'*.{md,css,scss}':
+  - npm format:fix
