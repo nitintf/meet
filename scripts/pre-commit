@@ -1,7 +1,0 @@
-CLIENT_SRC_PATTERN="client/"
-if git diff --cached --name-only | grep --quiet "$CLIENT_SRC_PATTERN"
-then
-  cd client && npx lint-staged
-fi
-
-golangci-lint run
